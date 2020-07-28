@@ -19,8 +19,9 @@ class Card:
 
 # 2: Player - these are the players who will play the game
 class Player:
-	def __init__(self, score, memsize, name, revealed, pick_strat):
+	def __init__(self, score, score_record, memsize, name, revealed, pick_strat):
 		self.score = score 
+		self.score_record = []
 		self.memsize = memsize
 		self.memory = []
 		self.picked = []
@@ -61,11 +62,11 @@ def check_picked(player, picked):
 	#print('Didnt get a pair this time...')
 	current_player.picked = []
 
-player1 = Player(0,0, 'player1', revealed, blurry_mem_strat)
-player2 = Player(0,2, 'player2', revealed, blurry_mem_strat)
-player3 = Player(0,4, 'player3', revealed, blurry_mem_strat)
-player4 = Player(0,8, 'player4', revealed, blurry_mem_strat)
-player5 = Player(0,16, 'player5', revealed, blurry_mem_strat)
+player1 = Player(0,[0],0, 'player1', revealed, blurry_mem_strat)
+player2 = Player(0,[0],5, 'player2', revealed, blurry_mem_strat)
+player3 = Player(0,[0],10, 'player3', revealed, blurry_mem_strat)
+player4 = Player(0,[0],5, 'player4', revealed, conc_mem_strat)
+player5 = Player(0,[0],10, 'player5', revealed, conc_mem_strat)
 
 players = [player1, player2, player3, player4, player5]
 cards = create_cards(width, height)
@@ -113,9 +114,21 @@ while cards:
 		x = current_player.pick() # Current player picks
 		if check_picked(current_player, x) != 'Success': # Check if he picked a pair. If not, it's the next players turn.
 			break
+	for i in players:
+		i.score_record.append(i.score)
 	n += 1
 
 
 f = lambda x: x.name + ':  ' + str(x.score)
 for i in players:
 	print(f(i))#print(list(map(f,players)))
+
+
+x = range(len(player1.score_record))
+print(x)
+for i in players:
+	plt.plot(x,i.score_record, label = str(i.name) + ' '+ str(i.pick_strat.__name__))
+plt.xlabel('Turn number \n (every players turns contribute to this number)')
+plt.ylabel('Score')
+plt.legend()
+plt.show()
