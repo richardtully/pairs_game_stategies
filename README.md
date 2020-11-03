@@ -1,5 +1,6 @@
 # pairs_game_stategies
-I've created two strategies for playing pairs that can play against each other 
+
+This code simulates a game of 'Pairs' AKA 'Concentration' (https://en.wikipedia.org/wiki/Concentration_(card_game)).
 
 Add as many players as you like
 
