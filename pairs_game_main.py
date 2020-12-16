@@ -87,8 +87,8 @@ MM.    `7MMF' ,pm9MM    MM    MM    MM  8M""""""       MM   Y     MM  8M     M8 
 
 
 # Width and height of the grid of cards
-width = 10
-height = 10
+width = 20
+height = 20
 
 # If 2 cards get picked but they aren't a pair, they're added to the revealed list
 # Players can see details of the last x cards in revealed, where x is their memory length
@@ -137,6 +137,7 @@ while cards:
 
 
 # Print everyones final score
+print('Final Scores:')
 f = lambda x: x.name + ':  ' + str(x.score)
 for i in players:
 	print(f(i))
